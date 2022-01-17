@@ -5,6 +5,7 @@ import com.datajpa.dto.CustomerDTO;
 import com.datajpa.entity.Customer;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -55,6 +56,8 @@ public class CustomerServiceImpl implements CustomerService{
 
     }
 
+
+
     @Override
     public CustomerDTO get(Long phoneNumber) {
 
@@ -66,5 +69,26 @@ public class CustomerServiceImpl implements CustomerService{
             return Customer.prepareDTO(customer);
         }
         return new CustomerDTO();
+    }
+
+    @Override
+    public List<CustomerDTO> getSortDecPhoneNum() {
+        List<Customer> list = customerDAO.findAll(Sort.by(Sort.Direction.DESC, "phoneNumber"));
+        List<CustomerDTO> dtoList = new ArrayList<>();
+        for(Customer customer : list){
+            dtoList.add(Customer.prepareDTO(customer));
+        }
+        return dtoList;
+    }
+
+    @Override
+    public List<CustomerDTO> getPagingElements() {
+        Pageable pageable = PageRequest.of(1, 3);
+        Page<Customer> pageList = customerDAO.findAll(pageable);
+        List<CustomerDTO> dtoList = new ArrayList<>();
+        for(Customer customer : pageList){
+            dtoList.add(Customer.prepareDTO(customer));
+        }
+        return dtoList;
     }
 }

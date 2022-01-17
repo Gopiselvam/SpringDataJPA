@@ -9,6 +9,7 @@ public interface CustomerService {
 	void remove(Long phoneNo);
     List<CustomerDTO> getAll();
     void update(Long phoneNo, String address);
-
+    List<CustomerDTO> getSortDecPhoneNum();
+    List<CustomerDTO> getPagingElements();
     CustomerDTO get(Long phoneNumber);
 }
