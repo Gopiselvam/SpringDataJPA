@@ -3,6 +3,7 @@ package com.datajpa.service;
 import com.datajpa.dto.CustomerDTO;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -107,11 +107,20 @@ class CustomerServiceImplTest {
         assertEquals(pagedListHolder.getPageList(), customerService.getPagingElements());
     }
 
+
     private List<CustomerDTO> getSortedListWithPhoneNUmber(List<CustomerDTO> list) {
         List<CustomerDTO> sortedList = list.stream()
                 .sorted(Comparator.comparing(CustomerDTO::getPhoneNumber))
                 .collect(Collectors.toList());
         return sortedList;
+    }
+
+    @SneakyThrows
+    @Test
+    void getCustomerByPlanId() {
+        List<CustomerDTO> expected = customerList.stream().filter(x -> x.getPlanId() == 1).collect(Collectors.toList());
+        List<CustomerDTO> actual = customerService.getCustomerByPlanId(1);
+        assertTrue(expected.containsAll(actual));
     }
 
 

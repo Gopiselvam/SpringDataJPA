@@ -16,10 +16,14 @@
 - List<CustomerDTO> sortedList = list.stream()
                 .sorted(Comparator.comparing(CustomerDTO::getPhoneNumber))
                 .collect(Collectors.toList());
+- used @Sql() tag to load the Database before each test method
 
 
 **Advice**
 - (List<CustomObject>).containsAll(Collection<CustomObject>) method evaluates to true only 
 when the CustomObject implements Equals and Hashcode method
--
+- Spring oot JPA will automatically convert the column addressId to address_id while creating tables automatically
+- Make sure to override Equals and Hashcode method while comparing objects via assertEquals()
+- the mthodName parameters should be sequencially in order with input parameters. Eg: findByEmailAndContactNumber(contactNumber, email) is incorrect.
+The correct way is findByEmailAndContactNumber(email, contactNumber)
 

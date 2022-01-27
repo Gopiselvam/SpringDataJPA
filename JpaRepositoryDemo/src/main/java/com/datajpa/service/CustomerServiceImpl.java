@@ -3,6 +3,7 @@ package com.datajpa.service;
 import com.datajpa.dao.CustomerRepository;
 import com.datajpa.dto.CustomerDTO;
 import com.datajpa.entity.Customer;
+import com.datajpa.exceptions.CustomerNotFoundException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service("customerService")
 public class CustomerServiceImpl implements CustomerService{
@@ -69,6 +71,13 @@ public class CustomerServiceImpl implements CustomerService{
             return Customer.prepareDTO(customer);
         }
         return new CustomerDTO();
+    }
+
+    @Override
+    public List<CustomerDTO> getCustomerByPlanId(Integer planId) throws CustomerNotFoundException {
+         List<Customer> list = customerDAO.findByPlanId(planId)
+                 .orElseThrow(() -> new CustomerNotFoundException("Customer Not Found with plan id = "+planId));
+         return list.stream().map(Customer::prepareDTO).collect(Collectors.toList());
     }
 
     @Override

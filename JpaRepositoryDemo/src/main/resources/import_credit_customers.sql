@@ -1,0 +1,10 @@
+INSERT INTO CREDIT_CARD_CUSTOMERS_ADDRESS (address_id, city, pincode) VALUES (101, 'Vadodara', '391421');
+INSERT INTO CREDIT_CARD_CUSTOMERS_ADDRESS (address_id, city, pincode) VALUES (102, 'Delhi', '110006');
+INSERT INTO CREDIT_CARD_CUSTOMERS_ADDRESS (address_id, city, pincode) VALUES (103, 'Theni', '625513');
+INSERT INTO CREDIT_CARD_CUSTOMERS_ADDRESS (address_id, city, pincode) VALUES (104, 'Amritsar', '143502');
+INSERT INTO CREDIT_CARD_CUSTOMERS_ADDRESS (address_id, city, pincode) VALUES (105, 'Delhi', '110006');
+INSERT INTO CREDIT_CARD_CUSTOMERS (customer_id,active,credit_points,first_name,last_name,contact_number,email, address_address_id) VALUES (1001, true, 56, 'Anoop', 'Gupta', '9874563210', 'anoop@gmail.com',101 );
+INSERT INTO CREDIT_CARD_CUSTOMERS (customer_id,active,credit_points,first_name,last_name,contact_number,email, address_address_id) VALUES (1002, true, 45, 'Shreya', 'Gupta', '7896541230', 'shreya@gmail.com',102);
+INSERT INTO CREDIT_CARD_CUSTOMERS (customer_id,active,credit_points,first_name,last_name,contact_number,email, address_address_id) VALUES (1003, true, 72, 'Senthil', 'Kumar', '9632587410', 'senthil@gmail.com',103);
+INSERT INTO CREDIT_CARD_CUSTOMERS (customer_id,active,credit_points,first_name,last_name,contact_number,email, address_address_id) VALUES (1004, false, 22, 'Senthil', 'Singh', '7412589630', 'sensing@gmail.com',104);
+INSERT INTO CREDIT_CARD_CUSTOMERS (customer_id,active,credit_points,first_name,last_name,contact_number,email, address_address_id) VALUES (1005, true, 35, 'Kapil', 'Singh', '7534216980', 'kapsi@gmail.com',105);

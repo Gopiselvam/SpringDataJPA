@@ -1,6 +1,7 @@
 package com.datajpa.service;
 
 import com.datajpa.dto.CustomerDTO;
+import com.datajpa.exceptions.CustomerNotFoundException;
 
 import java.util.List;
 
@@ -12,4 +13,5 @@ public interface CustomerService {
     List<CustomerDTO> getSortDecPhoneNum();
     List<CustomerDTO> getPagingElements();
     CustomerDTO get(Long phoneNumber);
+    List<CustomerDTO> getCustomerByPlanId(Integer planId) throws CustomerNotFoundException;
 }
