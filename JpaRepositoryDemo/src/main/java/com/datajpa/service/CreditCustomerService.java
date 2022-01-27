@@ -64,6 +64,13 @@ public class CreditCustomerService {
                                 " or in cities  = "+cities));
     }
 
+    public List<CreditCustomers> lastNameAndAddressCityUsingQueryAnnotation(String lastName, Collection<String> cities) throws CustomerNotFoundException {
+        return dao.lastNameAndAddressCityUsingQueryAnnotation(lastName, cities)
+                .orElseThrow(() ->
+                        new CustomerNotFoundException("Customer Not Found With last name " + lastName +
+                                " or in cities  = "+cities));
+    }
+
 
 
 

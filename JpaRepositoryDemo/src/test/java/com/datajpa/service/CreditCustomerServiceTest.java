@@ -137,9 +137,22 @@ class CreditCustomerServiceTest {
         assertEquals(expected, actual);
     }
 
+    @SneakyThrows
+    @Test
+    void lastNameAndAddressCityUsingQueryAnnotation() {
+
+        List<String> cities = Arrays.asList("Delhi", "Theni");
+        List<CreditCustomers> expected = list.stream()
+                .filter(c -> c.getLastName().equals("Gupta") && cities.contains(c.getAddress().getCity()))
+                .collect(Collectors.toList());
+        List<CreditCustomers> actual = service.lastNameAndAddressCityUsingQueryAnnotation("Gupta",cities);
+        assertEquals(expected, actual);
+    }
+
     @AfterAll
     void afterAll() {
         list = null;
     }
+
 
 }
