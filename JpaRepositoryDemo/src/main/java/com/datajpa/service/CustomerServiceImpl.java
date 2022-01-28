@@ -88,6 +88,13 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
+    public List<CustomerDTO> fetchCustomerAgeGT88(int age) throws CustomerNotFoundException {
+        List<Customer> list = customerDAO.fetchCustomerAgeGT88(age)
+                .orElseThrow(() -> new CustomerNotFoundException("Customer Not Found with age > "+age));
+        return list.stream().map(Customer::prepareDTO).collect(Collectors.toList());
+    }
+
+    @Override
     public List<CustomerDTO> getSortDecPhoneNum() {
         List<Customer> list = customerDAO.findAll(Sort.by(Sort.Direction.DESC, "phoneNumber"));
         List<CustomerDTO> dtoList = new ArrayList<>();

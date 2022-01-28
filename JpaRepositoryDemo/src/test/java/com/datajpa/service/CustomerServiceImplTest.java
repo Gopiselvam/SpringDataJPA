@@ -131,6 +131,14 @@ class CustomerServiceImplTest {
         assertTrue(expected.containsAll(actual));
     }
 
+    @SneakyThrows
+    @Test
+    void fetchCustomerAgeGT88() {
+        List<CustomerDTO> expected = customerList.stream().filter(x -> x.getAge() > 80).collect(Collectors.toList());
+        List<CustomerDTO> actual = customerService.fetchCustomerAgeGT88(80);
+        assertTrue(expected.containsAll(actual));
+    }
+
     @AfterAll
     void testRemoveTruncateTable() {
         for(CustomerDTO dto : customerList){
