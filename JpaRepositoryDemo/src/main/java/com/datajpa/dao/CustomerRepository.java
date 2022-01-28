@@ -17,4 +17,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     @Query(value = "select * from customer_jaktel where age > 80;", nativeQuery = true)
     Optional<List<Customer>> fetchCustomerAgeGT88(int age);
+
+
+
 }

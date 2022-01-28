@@ -149,10 +149,22 @@ class CreditCustomerServiceTest {
         assertEquals(expected, actual);
     }
 
+    @SneakyThrows
+    @Test
+    void findUsingLastNameAndListOfCitiesParam() {
+
+        List<String> cities = Arrays.asList("Delhi", "Theni");
+        List<CreditCustomers> expected = list.stream()
+                .filter(c -> c.getLastName().equals("Gupta") && cities.contains(c.getAddress().getCity()))
+                .collect(Collectors.toList());
+        List<CreditCustomers> actual = service.findUsingLastNameAndListOfCitiesParam("Gupta",cities);
+        assertEquals(expected, actual);
+    }
     @AfterAll
     void afterAll() {
         list = null;
     }
+
 
 
 }

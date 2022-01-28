@@ -72,6 +72,14 @@ public class CreditCustomerService {
     }
 
 
+    public List<CreditCustomers> findUsingLastNameAndListOfCitiesParam(String lastName, Collection<String> cities) throws CustomerNotFoundException {
+        return dao.findUsingLastNameAndListOfCitiesParam(lastName, cities)
+                .orElseThrow(() ->
+                        new CustomerNotFoundException("Customer Not Found With last name " + lastName +
+                                " or in cities  = "+cities));
+    }
+
+
 
 
 

@@ -1,8 +1,10 @@
 package com.datajpa.dao;
 
 import com.datajpa.entity.CreditCustomers;
+import com.datajpa.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -39,6 +41,7 @@ public interface CreditCustomerRepository extends JpaRepository<CreditCustomers,
     @Query("select c from CreditCustomers c where c.lastName = ?1 and c.address.city in ?2")
     Optional<List<CreditCustomers>> lastNameAndAddressCityUsingQueryAnnotation(String lastName, Collection<String> cities);
 
-
+    @Query("select c from CreditCustomers c where c.lastName = :lastname and c.address.city in :cities")
+    Optional<List<CreditCustomers>> findUsingLastNameAndListOfCitiesParam(@Param("lastname") String lastName, @Param("cities") Collection<String> cities);
 
 }
