@@ -27,3 +27,5 @@ when the CustomObject implements Equals and Hashcode method
 - the mthodName parameters should be sequencially in order with input parameters. Eg: findByEmailAndContactNumber(contactNumber, email) is incorrect.
 The correct way is findByEmailAndContactNumber(email, contactNumber)
 
+- Make sure to use @Transactional @Modifying before DML queries (delete, update)
+

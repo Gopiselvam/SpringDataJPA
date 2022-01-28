@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface CreditCustomerRepository extends JpaRepository<CreditCustomers, Integer> {
+public interface CreditCustomersRepo extends JpaRepository<CreditCustomers, Integer> {
 
     // select c from CreditCustomers c where c.email = ?
     Optional<CreditCustomers> findByEmail(String email);

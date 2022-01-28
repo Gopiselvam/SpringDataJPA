@@ -2,8 +2,10 @@ package com.datajpa.service;
 
 import com.datajpa.dto.CustomerDTO;
 import com.datajpa.exceptions.CustomerNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 
 public interface CustomerService {
 	void insert(CustomerDTO customer);

@@ -1,6 +1,6 @@
 package com.datajpa.service;
 
-import com.datajpa.dao.CreditCustomerRepository;
+import com.datajpa.dao.CreditCustomersRepo;
 import com.datajpa.entity.CreditCustomers;
 import com.datajpa.exceptions.CustomerNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import java.util.List;
 public class CreditCustomerService {
 
     @Autowired
-    CreditCustomerRepository dao;
+    CreditCustomersRepo dao;
 
     public CreditCustomers findByEmail(String email) throws CustomerNotFoundException {
 

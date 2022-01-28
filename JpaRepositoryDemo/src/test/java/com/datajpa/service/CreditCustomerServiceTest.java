@@ -25,7 +25,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@Sql(scripts = {"/import_credit_customers.sql"})
 @SqlGroup({
         @Sql(scripts = {"/import_credit_customers.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD),
         @Sql(scripts = {"/truncate_credit_customer.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
