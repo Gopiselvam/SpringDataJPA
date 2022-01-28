@@ -123,6 +123,13 @@ class CustomerServiceImplTest {
         assertTrue(expected.containsAll(actual));
     }
 
+    @SneakyThrows
+    @Test
+    void fetchUsingAddressNamedQuery() {
+        List<CustomerDTO> expected = customerList.stream().filter(x -> x.getAddress().equals("New York")).collect(Collectors.toList());
+        List<CustomerDTO> actual = customerService.fetchUsingAddressNamedQuery("New York");
+        assertTrue(expected.containsAll(actual));
+    }
 
     @AfterAll
     void testRemoveTruncateTable() {

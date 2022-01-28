@@ -3,10 +3,7 @@ package com.datajpa.entity;
 import com.datajpa.dto.CustomerDTO;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "customer_jaktel")
@@ -15,6 +12,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @ToString
+@NamedQuery(name="Customer.fetchUsingAddress", query = "select c from Customer c where c.address = ?1")
 public class Customer {
 
     @Id

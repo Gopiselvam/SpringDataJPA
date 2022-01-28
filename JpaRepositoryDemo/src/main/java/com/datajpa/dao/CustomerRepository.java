@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     Optional<List<Customer>> findByPlanId(Integer planId);
+
+    Optional<List<Customer>> fetchUsingAddress(String address);
 }

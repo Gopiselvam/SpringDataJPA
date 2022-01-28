@@ -81,6 +81,13 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
+    public List<CustomerDTO> fetchUsingAddressNamedQuery(String address) throws CustomerNotFoundException {
+        List<Customer> list = customerDAO.fetchUsingAddress(address)
+                .orElseThrow(() -> new CustomerNotFoundException("Customer Not Found with Address = "+address));
+        return list.stream().map(Customer::prepareDTO).collect(Collectors.toList());
+    }
+
+    @Override
     public List<CustomerDTO> getSortDecPhoneNum() {
         List<Customer> list = customerDAO.findAll(Sort.by(Sort.Direction.DESC, "phoneNumber"));
         List<CustomerDTO> dtoList = new ArrayList<>();

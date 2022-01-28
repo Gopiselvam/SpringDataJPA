@@ -14,4 +14,5 @@ public interface CustomerService {
     List<CustomerDTO> getPagingElements();
     CustomerDTO get(Long phoneNumber);
     List<CustomerDTO> getCustomerByPlanId(Integer planId) throws CustomerNotFoundException;
+    List<CustomerDTO> fetchUsingAddressNamedQuery(String address) throws CustomerNotFoundException;
 }
