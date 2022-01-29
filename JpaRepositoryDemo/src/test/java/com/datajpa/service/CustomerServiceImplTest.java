@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -137,6 +138,21 @@ class CustomerServiceImplTest {
         List<CustomerDTO> expected = customerList.stream().filter(x -> x.getAge() > 80).collect(Collectors.toList());
         List<CustomerDTO> actual = customerService.fetchCustomerAgeGT88(80);
         assertTrue(expected.containsAll(actual));
+    }
+
+    @SneakyThrows
+    @Test
+    void searchComplexCustomer(){
+        Predicate<CustomerDTO> p1  = (c) -> c.getName().equals("Donald Trump");
+        Predicate<CustomerDTO> p2  = (c) -> c.getAddress().equals("New York");
+        Predicate<CustomerDTO> p3  = (c) -> c.getGender().equals('F');
+        Predicate<CustomerDTO> p4  = (c) -> c.getAge().equals(1);
+        Predicate<CustomerDTO> exp1 = p1.and(p2);
+        Predicate<CustomerDTO> exp2 = p3.or(p4);
+        List<CustomerDTO> expected = customerList.stream().filter(exp1.or(exp2)).collect(Collectors.toList());
+        List<CustomerDTO> actual = customerService.searchComplexCustomer("Donald Trump", "New York", 'F', 1);
+
+        assertEquals(expected, actual);
     }
 
     @AfterAll

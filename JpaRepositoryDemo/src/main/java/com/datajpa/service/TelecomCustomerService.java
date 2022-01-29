@@ -6,11 +6,11 @@ import com.datajpa.entity.TelecomCustomer;
 import com.datajpa.entity.TelecomPlan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.Optional;
 
-@Transactional
+
 @Service
 public class TelecomCustomerService {
 
@@ -21,6 +21,7 @@ public class TelecomCustomerService {
     TelecomPlanRepository planDao;
 
 
+    @Transactional
     public void updateTelecomCustomerPlan(TelecomPlan plan, Long phoneNumber){
 
 
@@ -48,16 +49,29 @@ public class TelecomCustomerService {
                 System.out.println("CustomerDao No Integer result found");
             }
         }
+    }
 
 
+    @Transactional
+    public void updateCustomerPlanWithTransactionFailure(TelecomPlan plan){
+        planDao.updatePlan(plan.getPlanName(),plan.getLocalRate(), plan.getNationalRate(), plan.getPlanId());
 
-
-
+        try{
+            planDao.updatePlanWrongQuery();
+        }catch (Throwable exception) {
+            System.err.println("Error while fetching updatePlanWrongQuery");
+        }
     }
 
     public TelecomCustomer findById(long id) {
 
         return  customerDao.findById(id)
                 .orElseGet(TelecomCustomer::new);
+    }
+
+    public TelecomPlan findTelecomPLanById(int id) {
+
+        return  planDao.findById(id)
+                .orElseGet(TelecomPlan::new);
     }
 }

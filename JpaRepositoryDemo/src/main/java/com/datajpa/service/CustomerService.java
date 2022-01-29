@@ -18,5 +18,6 @@ public interface CustomerService {
     List<CustomerDTO> getCustomerByPlanId(Integer planId) throws CustomerNotFoundException;
     List<CustomerDTO> fetchUsingAddressNamedQuery(String address) throws CustomerNotFoundException;
     List<CustomerDTO> fetchCustomerAgeGT88(int age) throws CustomerNotFoundException;
+    List<CustomerDTO> searchComplexCustomer(String name, String address, Character gender, Integer age);
 
 }

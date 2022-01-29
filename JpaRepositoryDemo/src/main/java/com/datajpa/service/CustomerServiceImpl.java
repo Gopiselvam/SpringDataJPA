@@ -95,6 +95,12 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
+    public List<CustomerDTO> searchComplexCustomer(String name, String address, Character gender, Integer age) {
+        List<Customer> list = customerDAO.searchComplexCustomer(name, address, gender, age);
+        return list.stream().map(Customer::prepareDTO).collect(Collectors.toList());
+    }
+
+    @Override
     public List<CustomerDTO> getSortDecPhoneNum() {
         List<Customer> list = customerDAO.findAll(Sort.by(Sort.Direction.DESC, "phoneNumber"));
         List<CustomerDTO> dtoList = new ArrayList<>();

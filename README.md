@@ -28,4 +28,5 @@ when the CustomObject implements Equals and Hashcode method
 The correct way is findByEmailAndContactNumber(email, contactNumber)
 
 - Make sure to use @Transactional @Modifying before DML queries (delete, update)
+- make sure to import org.springframework.transaction.annotation.Transactional;
 

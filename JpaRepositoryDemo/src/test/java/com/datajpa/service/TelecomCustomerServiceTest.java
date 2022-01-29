@@ -2,6 +2,7 @@ package com.datajpa.service;
 
 import com.datajpa.entity.TelecomCustomer;
 import com.datajpa.entity.TelecomPlan;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.runner.RunWith;
@@ -12,17 +13,19 @@ import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SqlGroup({
-        @Sql(scripts = {"/import_telecom_customers.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD),
-        @Sql(scripts = {"/truncate_telecom_customer.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+        @Sql(scripts = {"/import_telecom_customers.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+        , @Sql(scripts = {"/truncate_telecom_customer.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 })
 class TelecomCustomerServiceTest {
 
     @Autowired
     TelecomCustomerService service;
+
 
     @Test
     void updateTelecomCustomerPlan() {
@@ -36,4 +39,21 @@ class TelecomCustomerServiceTest {
         assertEquals(customer, service.findById(9874563210L));
 
     }
+
+
+    @Test
+    void transactionFailureTest() {
+
+        TelecomPlan plan = new TelecomPlan(7, "TEL_700", 700, 700);
+        try{
+            service.updateCustomerPlanWithTransactionFailure(plan);
+        }catch (Throwable th){
+            System.err.println("Rollbacked");
+        }
+
+        TelecomPlan telecomPlan = new TelecomPlan(7, "TEL_70", 70, 70);
+        assertEquals(telecomPlan, service.findTelecomPLanById(7));
+    }
+
+
 }
