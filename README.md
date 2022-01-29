@@ -29,4 +29,5 @@ The correct way is findByEmailAndContactNumber(email, contactNumber)
 
 - Make sure to use @Transactional @Modifying before DML queries (delete, update)
 - make sure to import org.springframework.transaction.annotation.Transactional;
+- Use MySQL8Dialect to use innoDB to create Tables
 
