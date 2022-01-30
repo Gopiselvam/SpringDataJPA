@@ -24,6 +24,13 @@
                 .sorted(Comparator.comparing(CustomerDTO::getPhoneNumber))
                 .collect(Collectors.toList());
 - used @Sql() tag to load the Database before each test method
+- use scema.sql for creating DB. and data.sql for loading data in DB
+- alternatively we can define the custom filename and configure the following at class level
+	import org.springframework.test.context.jdbc.*
+	@SqlGroup({
+        @Sql(scripts = {"/import_credit_customers.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD),
+        @Sql(scripts = {"/truncate_credit_customer.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+	})
 
 
 **Advice**
