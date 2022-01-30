@@ -13,7 +13,7 @@ public interface TelecomCustomerRepository extends JpaRepository<TelecomCustomer
 
 
     @Transactional
-    @Modifying
+    @Modifying(clearAutomatically = true, flushAutomatically = true)
     @Query("update TelecomCustomer c set c.telecomPlan = ?1 where c.phoneNumber = ?2")
     Optional<?> updatePlanWherePhoneNumber(TelecomPlan plan, Long phoneNumber);
 }
