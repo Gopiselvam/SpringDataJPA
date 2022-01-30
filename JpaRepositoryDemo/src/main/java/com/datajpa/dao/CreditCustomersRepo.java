@@ -36,9 +36,13 @@ public interface CreditCustomersRepo extends JpaRepository<CreditCustomers, Inte
     Optional<List<CreditCustomers>> findByCreditPointsBetween(int c1point, int c2point);
 
     // select c from CreditCustomers c where c.lastName = ?1 and c.address.city in ?2
-    Optional<List<CreditCustomers>> findByLastNameAndAddress_CityIn(String lastName, Collection<String> cities);
+    Optional<List<CreditCustomers>> findByLastNameAndAddressCityIn(String lastName, Collection<String> cities);
 
-    @Query("select c from CreditCustomers c where c.lastName = ?1 and c.address.city in ?2")
+    Optional<List<CreditCustomers>> getByLastNameAndAddressCityIn(String lastName, Collection<String> cities);
+
+    Optional<List<CreditCustomers>> queryByLastNameAndAddressCityIn(String lastName, Collection<String> cities);
+
+    @Query(value = "select c from CreditCustomers c where c.lastName = ?1 and c.address.city in ?2")
     Optional<List<CreditCustomers>> lastNameAndAddressCityUsingQueryAnnotation(String lastName, Collection<String> cities);
 
     @Query("select c from CreditCustomers c where c.lastName = :lastname and c.address.city in :cities")

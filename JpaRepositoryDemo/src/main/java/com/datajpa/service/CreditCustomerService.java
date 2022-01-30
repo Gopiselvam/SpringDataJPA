@@ -58,7 +58,12 @@ public class CreditCustomerService {
     }
 
     public List<CreditCustomers> findByLastNameAndAddress_CityIn(String lastName, Collection<String> cities) throws CustomerNotFoundException {
-        return dao.findByLastNameAndAddress_CityIn(lastName, cities)
+//        return dao.findByLastNameAndAddressCityIn(lastName, cities)
+//                .orElseThrow(() ->
+//                        new CustomerNotFoundException("Customer Not Found With last name " + lastName +
+//                                " or in cities  = "+cities));
+
+        return dao.queryByLastNameAndAddressCityIn(lastName, cities)
                 .orElseThrow(() ->
                         new CustomerNotFoundException("Customer Not Found With last name " + lastName +
                                 " or in cities  = "+cities));
