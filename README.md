@@ -2,6 +2,13 @@
 1. Spring Data commons
 2. JpaRepository (public interface CustomerRepository extends JpaRepository<Customer, Long>)
 3. Paging and Sorting
+4. findBy methods
+5. @NamedQuery
+6. @Query
+7. @Transactional
+8. Custom repository
+9. MongoRepository
+10. H2 database
 
 **Java Tech stacks**
 
@@ -30,4 +37,5 @@ The correct way is findByEmailAndContactNumber(email, contactNumber)
 - Make sure to use @Transactional @Modifying before DML queries (delete, update)
 - make sure to import org.springframework.transaction.annotation.Transactional;
 - Use MySQL8Dialect to use innoDB to create Tables
+- use MySQL8Dialect for mysql (spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect)
 
